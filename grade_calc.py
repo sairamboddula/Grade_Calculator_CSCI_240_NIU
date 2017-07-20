@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 
 class GradeCalc:
 
     def __init__(self, master):
-
         self.logoStyle = ttk.Style()
         self.logoStyle.configure("BW.TLabel", foreground="black", background="white", font=('Courier', 14))
 
@@ -97,8 +97,58 @@ class GradeCalc:
 
         self.thirdFrame = ttk.Frame(master, padding="5p")
         self.thirdFrame.pack(padx=5, pady=5)
-        self.calculateBtn = ttk.Button(self.thirdFrame, text="Calculate my grade!")
+        self.calculateBtn = ttk.Button(self.thirdFrame, text="Calculate my grade!", command=self.calculate_grade)
         self.calculateBtn.pack()
+
+    def calculate_grade(self):
+
+        assignment_average = self.get_assignment_avg()
+        quiz_average = self.get_quiz_avg()
+        exam_average = self.get_exam_avg()
+
+        result = self.calculate_result(assignment_average, quiz_average, exam_average)
+        self.display_result(result)
+
+    def get_assignment_avg(self):
+        return (float(self.assignOne.get())
+                + float(self.assignTwo.get())
+                + float(self.assignThree.get())
+                + float(self.assignFour.get())
+                + float(self.assignFive.get())
+                + float(self.assignSix.get())
+                + float(self.assignSeven.get())
+                + float(self.assignEight.get())
+                + float(self.assignNine.get())
+                + float(self.assignTen.get())) / 10.0
+
+    def get_quiz_avg(self):
+        return (float(self.quizOne.get())
+                + float(self.quizTwo.get())
+                + float(self.quizThree.get())
+                + float(self.quizFour.get())
+                + float(self.quizFive.get())
+                + float(self.quizSix.get())
+                + float(self.quizSeven.get())
+                + float(self.quizEight.get())
+                + float(self.quizNine.get())
+                + float(self.quizTen.get())) / 10.0
+
+    def get_exam_avg(self):
+        return (float(self.midtermOne.get())
+                + float(self.midtermTwo.get())
+                + float(self.finalExam.get())) / 3.0
+
+    @staticmethod
+    def calculate_result(assignment_average, quiz_average, exam_average):
+        result = (assignment_average * 0.6) + (quiz_average * 0.4) + exam_average
+        return result
+
+    @staticmethod
+    def display_result(result):
+        if result == 20.0:
+            messagebox.showinfo("info", "You scored an A!")
+        else:
+            messagebox.showinfo("info", "You didn't score an A!")
 
 
 def main():
