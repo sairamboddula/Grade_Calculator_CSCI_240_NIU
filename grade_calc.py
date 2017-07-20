@@ -1,0 +1,111 @@
+from tkinter import *
+from tkinter import ttk
+
+
+class GradeCalc:
+
+    def __init__(self, master):
+
+        self.logoStyle = ttk.Style()
+        self.logoStyle.configure("BW.TLabel", foreground="black", background="white", font=('Courier', 14))
+
+        self.logoFrame = ttk.Frame(master)
+        ttk.Label(self.logoFrame, text="CSCI 240 Grade Calculator", style="BW.TLabel") \
+            .grid(row=0, column=0, columnspan=2)
+        self.logoFrame.pack()
+
+        self.firstFrame = ttk.LabelFrame(master, text="Assignments & Quizzes", padding="5p")
+        self.firstFrame.pack(padx=5, pady=5)
+
+        self.assignmentsFrame = ttk.LabelFrame(self.firstFrame, text="Assignments", padding="5p")
+        self.assignmentsFrame.pack(side=LEFT, padx=2)
+        ttk.Label(self.assignmentsFrame, text="Assignment 1: ").grid(row=0, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 2: ").grid(row=1, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 3: ").grid(row=2, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 4: ").grid(row=3, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 5: ").grid(row=4, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 6: ").grid(row=5, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 7: ").grid(row=6, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 8: ").grid(row=7, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 9: ").grid(row=8, column=0, sticky=E)
+        ttk.Label(self.assignmentsFrame, text="Assignment 10: ").grid(row=9, column=0, sticky=E)
+        self.assignOne = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignOne.grid(row=0, column=1)
+        self.assignTwo = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignTwo.grid(row=1, column=1)
+        self.assignThree = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignThree.grid(row=2, column=1)
+        self.assignFour = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignFour.grid(row=3, column=1)
+        self.assignFive = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignFive.grid(row=4, column=1)
+        self.assignSix = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignSix.grid(row=5, column=1)
+        self.assignSeven = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignSeven.grid(row=6, column=1)
+        self.assignEight = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignEight.grid(row=7, column=1)
+        self.assignNine = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignNine.grid(row=8, column=1)
+        self.assignTen = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignTen.grid(row=9, column=1)
+
+        self.quizzesFrame = ttk.LabelFrame(self.firstFrame, text="Quizzes", padding="5p")
+        self.quizzesFrame.pack(side=RIGHT, padx=2)
+        ttk.Label(self.quizzesFrame, text="Quiz 1: ").grid(row=0, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 2: ").grid(row=1, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 3: ").grid(row=2, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 4: ").grid(row=3, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 5: ").grid(row=4, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 6: ").grid(row=5, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 7: ").grid(row=6, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 8: ").grid(row=7, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 9: ").grid(row=8, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 10: ").grid(row=9, column=0, sticky=E)
+        self.quizOne = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizOne.grid(row=0, column=1)
+        self.quizTwo = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizTwo.grid(row=1, column=1)
+        self.quizThree = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizThree.grid(row=2, column=1)
+        self.quizFour = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizFour.grid(row=3, column=1)
+        self.quizFive = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizFive.grid(row=4, column=1)
+        self.quizSix = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizSix.grid(row=5, column=1)
+        self.quizSeven = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizSeven.grid(row=6, column=1)
+        self.quizEight = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizEight.grid(row=7, column=1)
+        self.quizNine = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizNine.grid(row=8, column=1)
+        self.quizTen = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizTen.grid(row=9, column=1)
+
+        self.secondFrame = ttk.LabelFrame(master, text="Examinations", padding="5p")
+        self.secondFrame.pack(padx=5, pady=5)
+        ttk.Label(self.secondFrame, text="Midterm 1: ").grid(row=0, column=0, sticky=E)
+        ttk.Label(self.secondFrame, text="Midterm 2: ").grid(row=1, column=0, sticky=E)
+        ttk.Label(self.secondFrame, text="Finals: ").grid(row=2, column=0, sticky=E)
+        self.midtermOne = ttk.Entry(self.secondFrame, justify=RIGHT)
+        self.midtermOne.grid(row=0, column=1)
+        self.midtermTwo = ttk.Entry(self.secondFrame, justify=RIGHT)
+        self.midtermTwo.grid(row=1, column=1)
+        self.finalExam = ttk.Entry(self.secondFrame, justify=RIGHT)
+        self.finalExam.grid(row=2, column=1)
+
+        self.thirdFrame = ttk.Frame(master, padding="5p")
+        self.thirdFrame.pack(padx=5, pady=5)
+        self.calculateBtn = ttk.Button(self.thirdFrame, text="Calculate my grade!")
+        self.calculateBtn.pack()
+
+
+def main():
+    root = Tk()
+    app = GradeCalc(root)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
