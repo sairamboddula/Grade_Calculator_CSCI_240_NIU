@@ -17,6 +17,9 @@ class GradeCalc:
         self.firstFrame = ttk.LabelFrame(master, text="Assignments & Quizzes", padding="5p")
         self.firstFrame.pack(padx=5, pady=5)
 
+        vcmd = (master.register(self.validate),
+                '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
+
         self.assignmentsFrame = ttk.LabelFrame(self.firstFrame, text="Assignments", padding="5p")
         self.assignmentsFrame.pack(side=LEFT, padx=2)
         ttk.Label(self.assignmentsFrame, text="Assignment 1: ").grid(row=0, column=0, sticky=E)
@@ -29,25 +32,25 @@ class GradeCalc:
         ttk.Label(self.assignmentsFrame, text="Assignment 8: ").grid(row=7, column=0, sticky=E)
         ttk.Label(self.assignmentsFrame, text="Assignment 9: ").grid(row=8, column=0, sticky=E)
         ttk.Label(self.assignmentsFrame, text="Assignment 10: ").grid(row=9, column=0, sticky=E)
-        self.assignOne = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignOne = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignOne.grid(row=0, column=1)
-        self.assignTwo = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignTwo = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignTwo.grid(row=1, column=1)
-        self.assignThree = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignThree = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignThree.grid(row=2, column=1)
-        self.assignFour = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignFour = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignFour.grid(row=3, column=1)
-        self.assignFive = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignFive = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignFive.grid(row=4, column=1)
-        self.assignSix = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignSix = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignSix.grid(row=5, column=1)
-        self.assignSeven = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignSeven = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignSeven.grid(row=6, column=1)
-        self.assignEight = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignEight = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignEight.grid(row=7, column=1)
-        self.assignNine = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignNine = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignNine.grid(row=8, column=1)
-        self.assignTen = ttk.Entry(self.assignmentsFrame, justify=RIGHT)
+        self.assignTen = ttk.Entry(self.assignmentsFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
         self.assignTen.grid(row=9, column=1)
 
         self.quizzesFrame = ttk.LabelFrame(self.firstFrame, text="Quizzes", padding="5p")
@@ -62,6 +65,8 @@ class GradeCalc:
         ttk.Label(self.quizzesFrame, text="Quiz 8: ").grid(row=7, column=0, sticky=E)
         ttk.Label(self.quizzesFrame, text="Quiz 9: ").grid(row=8, column=0, sticky=E)
         ttk.Label(self.quizzesFrame, text="Quiz 10: ").grid(row=9, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 11: ").grid(row=10, column=0, sticky=E)
+        ttk.Label(self.quizzesFrame, text="Quiz 12: ").grid(row=11, column=0, sticky=E)
         self.quizOne = ttk.Entry(self.quizzesFrame, justify=RIGHT)
         self.quizOne.grid(row=0, column=1)
         self.quizTwo = ttk.Entry(self.quizzesFrame, justify=RIGHT)
@@ -82,6 +87,10 @@ class GradeCalc:
         self.quizNine.grid(row=8, column=1)
         self.quizTen = ttk.Entry(self.quizzesFrame, justify=RIGHT)
         self.quizTen.grid(row=9, column=1)
+        self.quizEleven = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizEleven.grid(row=10, column=1)
+        self.quizTwelve = ttk.Entry(self.quizzesFrame, justify=RIGHT)
+        self.quizTwelve.grid(row=11, column=1)
 
         self.secondFrame = ttk.LabelFrame(master, text="Examinations", padding="5p")
         self.secondFrame.pack(padx=5, pady=5)
@@ -149,6 +158,23 @@ class GradeCalc:
             messagebox.showinfo("info", "You scored an A!")
         else:
             messagebox.showinfo("info", "You didn't score an A!")
+
+    @staticmethod
+    def validate(action, index, value_if_allowed,
+                 prior_value, text, validation_type, trigger_type, widget_name):
+        if action == '1':
+            if text in '0123456789.-+':
+                try:
+                    if float(value_if_allowed) and (float(value_if_allowed) <= 100.0):
+                        return True
+                    else:
+                        return False
+                except ValueError:
+                    return False
+            else:
+                return False
+        else:
+            return True
 
 
 def main():
