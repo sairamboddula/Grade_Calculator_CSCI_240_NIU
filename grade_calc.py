@@ -7,12 +7,14 @@ class GradeCalc:
 
     def __init__(self, master):
         self.logoStyle = ttk.Style()
-        self.logoStyle.configure("BW.TLabel", foreground="white", background="black", font=('Calibri', 18, 'bold'))
+        self.logoStyle.configure("BW.TLabel", foreground="white", background="black", font=('Calibri', 20, 'bold'))
 
         self.logoFrame = ttk.Frame(master)
-        ttk.Label(self.logoFrame, text="CSCI 240 Grade Calculator", style="BW.TLabel") \
-            .grid(row=0, column=0, columnspan=2)
-        self.logoFrame.pack()
+        self.logo = PhotoImage(file='C:\\Users\\Ram\\PycharmProjects\\GradeCalculator\\NIU_Logo.gif').subsample(2, 2)
+        self.logoLabel = ttk.Label(self.logoFrame, image=self.logo, text="CSCI 240 Grade Calculator", style="BW.TLabel"
+                                   , compound='left')
+        self.logoLabel.grid(row=0, column=0, columnspan=2)
+        self.logoFrame.pack(pady=10)
 
         self.firstFrame = ttk.LabelFrame(master, text="Assignments & Quizzes", padding="5p")
         self.firstFrame.pack(padx=5, pady=5)
@@ -112,52 +114,65 @@ class GradeCalc:
     def calculate_grade(self):
 
         assignment_average = self.get_assignment_avg()
-        quiz_average = self.get_quiz_avg()
-        exam_average = self.get_exam_avg()
+        quiz_and_exam_average = self.get_quiz_and_exam_avg()
 
-        result = self.calculate_result(assignment_average, quiz_average, exam_average)
+        result = self.calculate_result(assignment_average, quiz_and_exam_average)
         self.display_result(result)
 
     def get_assignment_avg(self):
-        return (float(self.assignOne.get())
-                + float(self.assignTwo.get())
-                + float(self.assignThree.get())
-                + float(self.assignFour.get())
-                + float(self.assignFive.get())
-                + float(self.assignSix.get())
-                + float(self.assignSeven.get())
-                + float(self.assignEight.get())
-                + float(self.assignNine.get())
-                + float(self.assignTen.get())) / 10.0
+        assign_mark_list = [float(self.assignOne.get())
+                            , float(self.assignTwo.get())
+                            , float(self.assignThree.get())
+                            , float(self.assignFour.get())
+                            , float(self.assignFive.get())
+                            , float(self.assignSix.get())
+                            , float(self.assignSeven.get())
+                            , float(self.assignEight.get())
+                            , float(self.assignNine.get())
+                            , float(self.assignTen.get())]
 
-    def get_quiz_avg(self):
-        return (float(self.quizOne.get())
-                + float(self.quizTwo.get())
-                + float(self.quizThree.get())
-                + float(self.quizFour.get())
-                + float(self.quizFive.get())
-                + float(self.quizSix.get())
-                + float(self.quizSeven.get())
-                + float(self.quizEight.get())
-                + float(self.quizNine.get())
-                + float(self.quizTen.get())) / 10.0
+        return sum(assign_mark_list) / 1000.0
 
-    def get_exam_avg(self):
-        return (float(self.midtermOne.get())
-                + float(self.midtermTwo.get())
-                + float(self.finalExam.get())) / 3.0
+    def get_quiz_and_exam_avg(self):
+        quiz_mark_list = [float(self.quizOne.get())
+                            , float(self.quizTwo.get())
+                            , float(self.quizThree.get())
+                            , float(self.quizFour.get())
+                            , float(self.quizFive.get())
+                            , float(self.quizSix.get())
+                            , float(self.quizSeven.get())
+                            , float(self.quizEight.get())
+                            , float(self.quizNine.get())
+                            , float(self.quizTen.get())
+                            , float(self.quizEleven.get())
+                            , float(self.quizTwelve.get())]
+
+        exam_mark_list = [float(self.midtermOne.get())
+                            , float(self.midtermTwo.get())
+                            , float(self.finalExam.get())]
+
+        quiz_mark_list.sort()
+
+        return (sum(quiz_mark_list[2:])+sum(exam_mark_list)) / 400.0
 
     @staticmethod
-    def calculate_result(assignment_average, quiz_average, exam_average):
-        result = (assignment_average * 0.6) + (quiz_average * 0.4) + exam_average
-        return result
+    def calculate_result(assignment_average, quiz_and_exam_average):
+        return (assignment_average * 70) + (quiz_and_exam_average * 30)
 
     @staticmethod
     def display_result(result):
-        if result == 20.0:
-            messagebox.showinfo("info", "You scored an A!")
+        if 90 <= result <= 100:
+            message = "You scored an A"
+        elif 80 <= result <= 89.99:
+            message = "You scored a B"
+        elif 70 <= result <= 79.99:
+            message = "You scored a C"
+        elif 60 <= result <= 69.99:
+            message = "You scored a D"
         else:
-            messagebox.showinfo("info", "You didn't score an A!")
+            message = "You scored an F"
+
+        messagebox.showinfo("info", "You got " + str(result) + "%\n" + message)
 
     @staticmethod
     def validate(action, index, value_if_allowed,
