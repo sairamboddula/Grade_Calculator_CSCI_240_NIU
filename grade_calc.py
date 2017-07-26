@@ -22,6 +22,9 @@ class GradeCalc:
         vcmd = (master.register(self.validate),
                 '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
 
+        qcmd = (master.register(self.validate_quiz),
+                '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
+
         self.assignmentsFrame = ttk.LabelFrame(self.firstFrame, text="Assignments", padding="5p")
         self.assignmentsFrame.pack(side=LEFT, padx=2)
         ttk.Label(self.assignmentsFrame, text="Assignment 1: ").grid(row=0, column=0, sticky=E)
@@ -69,29 +72,29 @@ class GradeCalc:
         ttk.Label(self.quizzesFrame, text="Quiz 10: ").grid(row=9, column=0, sticky=E)
         ttk.Label(self.quizzesFrame, text="Quiz 11: ").grid(row=10, column=0, sticky=E)
         ttk.Label(self.quizzesFrame, text="Quiz 12: ").grid(row=11, column=0, sticky=E)
-        self.quizOne = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizOne = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizOne.grid(row=0, column=1)
-        self.quizTwo = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizTwo = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizTwo.grid(row=1, column=1)
-        self.quizThree = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizThree = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizThree.grid(row=2, column=1)
-        self.quizFour = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizFour = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizFour.grid(row=3, column=1)
-        self.quizFive = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizFive = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizFive.grid(row=4, column=1)
-        self.quizSix = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizSix = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizSix.grid(row=5, column=1)
-        self.quizSeven = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizSeven = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizSeven.grid(row=6, column=1)
-        self.quizEight = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizEight = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizEight.grid(row=7, column=1)
-        self.quizNine = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizNine = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizNine.grid(row=8, column=1)
-        self.quizTen = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizTen = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizTen.grid(row=9, column=1)
-        self.quizEleven = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizEleven = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizEleven.grid(row=10, column=1)
-        self.quizTwelve = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=vcmd)
+        self.quizTwelve = ttk.Entry(self.quizzesFrame, justify=RIGHT, validate='key', validatecommand=qcmd)
         self.quizTwelve.grid(row=11, column=1)
 
         self.secondFrame = ttk.LabelFrame(master, text="Examinations", padding="5p")
@@ -181,6 +184,23 @@ class GradeCalc:
             if text in '0123456789.-+':
                 try:
                     if float(value_if_allowed) and (float(value_if_allowed) <= 100.0):
+                        return True
+                    else:
+                        return False
+                except ValueError:
+                    return False
+            else:
+                return False
+        else:
+            return True
+
+    @staticmethod
+    def validate_quiz(action, index, value_if_allowed,
+                 prior_value, text, validation_type, trigger_type, widget_name):
+        if action == '1':
+            if text in '0123456789.-+':
+                try:
+                    if float(value_if_allowed) and (float(value_if_allowed) <= 10.0):
                         return True
                     else:
                         return False
