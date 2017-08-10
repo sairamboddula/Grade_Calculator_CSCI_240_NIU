@@ -114,6 +114,15 @@ class GradeCalc:
         self.calculateBtn = ttk.Button(self.thirdFrame, text="Calculate my grade!", command=self.calculate_grade)
         self.calculateBtn.pack()
 
+        self.statusBarFrame = ttk.Frame(master)
+        self.statusBarFrame.pack(fill=X, pady=5)
+        self.statusBarText = StringVar()
+        self.statusBarLabel = Label(self.statusBarFrame, bd=1, relief=SUNKEN, anchor=W
+                                    , textvariable=self.statusBarText
+                                    , font=('arial', 8, 'normal'))
+        self.statusBarLabel.pack(fill=X)
+        self.statusBarText.set("Ready")
+
     def calculate_grade(self):
 
         assignment_average = self.get_assignment_avg()
